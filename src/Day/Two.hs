@@ -35,3 +35,13 @@ parseRange range = (l, u)
 checkLine :: Line -> Bool
 checkLine Line{..} = occurrences <= upper && occurrences >= lower
   where occurrences = length $ filter (== letter) password
+
+solve2 :: IO Int
+solve2 = solution2 <$> input
+
+solution2 :: [String] -> Int
+solution2 = length . filter checkLine2 . map parse
+
+
+checkLine2 :: Line -> Bool
+checkLine2 Line{..} = (password !! (lower - 1) == letter) /= (password !! (upper - 1) == letter)
