@@ -11,7 +11,6 @@ inputFileName = getDataFileName "resources/one.txt"
 input :: IO [Int]
 input = do
   raw <- inputFileName >>= readFile
-
   return . map (read @Int) $ lines raw
 
 pairs :: [Int] -> [(Int, Int)]
@@ -29,6 +28,7 @@ solve = do
 solve2 :: IO Int
 solve2 = do
   solution2 <$> input
+
 solution2 :: [Int] -> Int
 solution2 = (\(x,y,z) -> x * y * z) . head . filter (\(x,y,z) -> x + y + z == 2020) . triples
 

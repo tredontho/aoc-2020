@@ -18,6 +18,7 @@ extra-source-files:  CHANGELOG.md
 executable aoc2020
   main-is:             Main.hs
   other-modules:       Day.One,
+                       Day.Two
                        Paths_aoc2020
   -- other-extensions:
   build-depends:       base ^>=4.14.1.0
