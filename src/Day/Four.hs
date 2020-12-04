@@ -85,7 +85,7 @@ validHeight q "in" = between (59, 76) q
 validHeight _ _ = False
 
 validHairColor :: String -> Bool
-validHairColor colo = length colo == 6 && all (Set.member `flip` validChars) colo
+validHairColor colo = length colo == 6 && all (`Set.member` validChars) colo
   where
     validChars = Set.fromList $ ['0' .. '9'] ++ ['a' .. 'f']
 
