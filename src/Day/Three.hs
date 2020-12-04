@@ -1,6 +1,4 @@
-module Day.Three
-
-where
+module Day.Three where
 
 import Paths_aoc2020 (getDataFileName)
 
@@ -24,4 +22,4 @@ solution :: Int -> Int -> [String] -> Int
 solution x y rows = length . filter (== '#') . map (head . head) . takeWhile (not . null) . iterate (shift x y) $ rows
 
 solve2 :: IO Int
-solve2 = fmap product $ sequence $ map (<$> input) [solution 1 1, solution 3 1, solution 5 1, solution 7 1, solution 1 2] 
+solve2 = fmap product $ sequence $ map (<$> input) [solution 1 1, solution 3 1, solution 5 1, solution 7 1, solution 1 2]

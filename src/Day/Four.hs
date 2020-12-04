@@ -1,13 +1,11 @@
-module Day.Four
+module Day.Four where
 
-where
-
-import Paths_aoc2020
 import Data.Char (isDigit)
-import Data.Map.Strict(Map)
+import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Set (Set)
 import qualified Data.Set as Set
+import Paths_aoc2020
 
 requiredFields :: Set String
 requiredFields = Set.fromList ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"]
@@ -40,16 +38,15 @@ makePassports [] = []
 makePassports xs = makePassport raw : makePassports rest
   where
     (current, rest) = case break null xs of
-      (y, _:ys) -> (y, ys)
+      (y, _ : ys) -> (y, ys)
       (y, []) -> (y, [])
     raw = words . unwords $ current
-
 
 -- Takes inputs in key:value
 makePassport :: [String] -> Passport
 makePassport = Map.fromList . map toTuple
   where
-    toTuple = (\(x,_:y) -> (x,y)) . break (== ':')
+    toTuple = (\(x, _ : y) -> (x, y)) . break (== ':')
 
 missingFields :: Passport -> Set String
 missingFields passport = requiredFields Set.\\ Map.keysSet passport
@@ -76,8 +73,8 @@ checkField ("hgt", hgt) = validHeight (read quantity) unit
   where
     (quantity, unit) = span isDigit hgt
 checkField ("hcl", hcl) = case hcl of
-                            '#':xs -> validHairColor xs
-                            _ -> False
+  '#' : xs -> validHairColor xs
+  _ -> False
 checkField ("ecl", ecl) = validEyeColor ecl
 checkField ("pid", pid) = length pid == 9 && all isDigit pid
 checkField _ = True
@@ -90,7 +87,7 @@ validHeight _ _ = False
 validHairColor :: String -> Bool
 validHairColor colo = length colo == 6 && all (Set.member `flip` validChars) colo
   where
-    validChars = Set.fromList $ ['0'..'9'] ++ ['a'..'f']
+    validChars = Set.fromList $ ['0' .. '9'] ++ ['a' .. 'f']
 
 validEyeColor :: String -> Bool
 validEyeColor = Set.member `flip` Set.fromList ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
