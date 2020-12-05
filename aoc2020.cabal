@@ -21,6 +21,7 @@ executable aoc2020
                        Day.Two,
                        Day.Three,
                        Day.Four,
+                       Day.Five,
                        Paths_aoc2020
   -- other-extensions:
   build-depends:       base ^>=4.14.1.0,
